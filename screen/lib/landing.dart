@@ -13,7 +13,7 @@ class _LandingScreenState extends State<LandingScreen> {
   void initState() {
     super.initState();
       Timer(const Duration(seconds: 5), () {
-      Navigator.pushReplacementNamed(context, '/login');
+      Navigator.pushReplacementNamed(context, '/home');
     });
   }
 
