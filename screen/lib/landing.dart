@@ -3,13 +3,19 @@ import 'package:flutter/material.dart';
 void main() => runApp(const LandingScreen());
 
 class LandingScreen extends StatelessWidget {
-  const LandingScreen({super.key});
+  const LandingScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'PartageO',
-      home: Scaffold(body: Image.asset('assets/images/HomeLogo.svg')),
+      home: Scaffold(
+        body: ListView(
+          children: [
+            Image.asset('assets/images/HomeLogo.png'),
+          ],
+        ),
+      ),
     );
   }
 }
