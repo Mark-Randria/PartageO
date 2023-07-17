@@ -19,6 +19,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const LandingScreen(),
+      routes: {
+        '/login': (context) => const LoginScreen(),
+      },
     );
   }
 }
