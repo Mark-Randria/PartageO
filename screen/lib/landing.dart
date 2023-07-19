@@ -20,7 +20,6 @@ class _LandingScreenState extends State<LandingScreen> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'PartageO',
       home: Scaffold(
         body: ListView(
           children: [

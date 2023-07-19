@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+Color primaryColor = const Color(0xFF0070FF);
+Color secondaryColor = const Color(0xFF696969);
+Color tertiaryColor = const Color(0xFFE5E4E2);
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,18 +39,66 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   const SizedBox(height: 40),
-                  OutlinedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/home');
-                    },
-                    child: const Text('Se connecter'),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 4.0, horizontal: 64.0),
+                    child: SizedBox(
+                        child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: FilledButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/signup');
+                            },
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStatePropertyAll(primaryColor),
+                              foregroundColor:
+                                  const MaterialStatePropertyAll(Colors.white),
+                            ),
+                            child: const Expanded(
+                                child: Text(
+                              'Se connecter',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w400,
+                              ),
+                            )),
+                          ),
+                        )
+                      ],
+                    )),
                   ),
                   const SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/login');
-                    },
-                    child: const Text("S'inscrire"),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 4.0, horizontal: 64.0),
+                    child: SizedBox(
+                        child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: OutlinedButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/login');
+                            },
+                            style: OutlinedButton.styleFrom(
+                              shape: const StadiumBorder(),
+                              side: BorderSide(width: 1, color: primaryColor),
+                            ),
+                            child: const Text(
+                              "S'inscrire",
+                              style: TextStyle(
+                                color: Color(0xFF0070FF),
+                                fontSize: 20,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    )),
                   ),
                 ],
               ),
