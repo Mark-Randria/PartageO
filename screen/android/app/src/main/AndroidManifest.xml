@@ -2,7 +2,7 @@
     <application
         android:label="partageo"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/partage_o">
         <activity
             android:name=".MainActivity"
             android:exported="true"

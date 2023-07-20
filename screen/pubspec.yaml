@@ -27,7 +27,9 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
-dependencies:
+dependencies:  
+  flutter_native_splash: ^2.3.1
+  flutter_launcher_icons: "^0.13.1"
   flutter:
     sdk: flutter
 
@@ -47,6 +49,24 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
 
+flutter_native_splash:
+  color: "#ffffff"
+  image: "assets/images/HomeLogo.png"
+  color_dark: "#000000"
+  image_dark: "assets/images/HomeLogo.png"
+  android_12:
+    color: "#ffffff"
+    image: "assets/images/HomeLogo.png"
+    color_dark: "#000000"
+    image_dark: "assets/images/HomeLogo.png"
+
+flutter_launcher_icons:
+  android: "Partageo"
+  image_path: "assets/images/icon.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/images/icon.png"
+  min_sdk_android: 21
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -55,7 +75,7 @@ flutter:
 
   uses-material-design: true
   assets:
-    - assets/images
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

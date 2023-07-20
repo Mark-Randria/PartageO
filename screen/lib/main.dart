@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
-import 'landing.dart';
 
 void main() {
   runApp(const MyApp());
