@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Color primaryColor = const Color(0xFF0070FF);
+Color primaryColor = const Color(0xFF1CA9C9);
 Color secondaryColor = const Color(0xFF696969);
 Color tertiaryColor = const Color(0xFFE5E4E2);
 
@@ -48,7 +48,7 @@ class HomeScreen extends StatelessWidget {
                         Expanded(
                           child: FilledButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, '/signup');
+                              Navigator.pushNamed(context, '/login');
                             },
                             style: ButtonStyle(
                               backgroundColor:
@@ -80,7 +80,7 @@ class HomeScreen extends StatelessWidget {
                         Expanded(
                           child: OutlinedButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, '/login');
+                              Navigator.pushNamed(context, '/signup');
                             },
                             style: OutlinedButton.styleFrom(
                               shape: const StadiumBorder(),

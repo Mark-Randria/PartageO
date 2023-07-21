@@ -1,0 +1,152 @@
+import 'package:flutter/material.dart';
+
+Color primaryColor = const Color(0xFF1CA9C9);
+Color secondaryColor = const Color(0xFF696969);
+Color tertiaryColor = const Color(0xFFE5E4E2);
+
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SignupScreen> createState() => _SignupScreenState();
+}
+
+class _SignupScreenState extends State<SignupScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: ListView(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: Column(
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: TextButton.styleFrom(
+                          foregroundColor: Colors.grey.shade900),
+                      child: const Icon(Icons.arrow_back, size: 32),
+                    ),
+                  ),
+                  const SizedBox(height: 25)
+                ],
+              ),
+            ),
+            const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(52.0, 0.0, 0.0, 0.0),
+                    child: Text(
+                      "Bienvenue !",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 32,
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w500,
+                      ),
+                    )),
+                SizedBox(height: 18),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(52.0, 0.0, 40.0, 0.0),
+                  child: Text(
+                    "Connectez-vous pour continuer",
+                    style: TextStyle(
+                      color: Color(0xFF696969),
+                      height: 1.4,
+                      fontSize: 20,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Column(
+                      children: [
+                        Text('E-mail'),
+                        const SizedBox(height: 10.0),
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: 'E-mail',
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.blue,
+                                width: 2,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 40.0),
+                        Text('Mot de passe'),
+                        const SizedBox(height: 10.0),
+                        TextField(
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            suffixIcon: Icon(Icons.remove_red_eye_outlined),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.blue,
+                                width: 2,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  child: SizedBox(
+                    child: Expanded(
+                      child: Center(
+                          child: FilledButton(
+                        onPressed: () {
+                          return none;
+                        },
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStatePropertyAll(primaryColor),
+                          foregroundColor:
+                              const MaterialStatePropertyAll(Colors.white),
+                        ),
+                        child: const Text(
+                          "Se connecter",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      )),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
