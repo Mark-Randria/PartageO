@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 class CustomTextField extends StatefulWidget {
   final String label;
-  final void Function(String) onSubmitted;
+  final TextEditingController controller;
 
-  const CustomTextField({Key? key, required this.label, required this.onSubmitted})
+  const CustomTextField(
+      {Key? key, required this.label, required this.controller})
       : super(key: key);
 
   @override
@@ -12,22 +13,18 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
-  final TextEditingController _controller = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(widget.label),
-        SizedBox(height: 10.0),
+        const SizedBox(height: 10.0),
         TextField(
-          controller: _controller,
-          onChanged: (value) {
-            widget.onSubmitted(value); // Pass the entered value to the callback
-          },
-          decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 12.0),
+          controller: widget.controller,
+          decoration: const InputDecoration(
+            contentPadding:
+                EdgeInsets.symmetric(vertical: 5.0, horizontal: 12.0),
             border: OutlineInputBorder(),
           ),
         ),
