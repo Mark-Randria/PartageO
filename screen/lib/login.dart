@@ -21,104 +21,103 @@ class LoginScreen extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent,
+            leading: IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+                size: 30.0,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            )),
         body: ListView(
           children: <Widget>[
-            SizedBox(
-              height: MediaQuery.of(context).size.height - 50,
-              child: Flex(
-                direction: Axis.vertical,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
+            Center(
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height * 0.8,
+                child: Flex(
+                  direction: Axis.vertical,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Expanded(
                       flex: 1,
-                      child: Row(
+                      child: Column(
                         children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              style: TextButton.styleFrom(
-                                  foregroundColor: Colors.grey.shade900),
-                              child: const Icon(Icons.arrow_back, size: 32),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0.0, 0, 0, 0),
+                            child: Text(
+                              "Bienvenue !",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 32,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ],
-                      )),
-                  const Expanded(
-                    flex: 1,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(40.0, 0, 0, 0),
-                          child: Text(
-                            "Bienvenue !",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 32,
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const Expanded(
+                      flex: 1,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0.0, 0, 0, 0),
+                            child: Text(
+                              "Connectez-vous pour continuer",
+                              style: TextStyle(
+                                color: Color(0xFF696969),
+                                height: 1.4,
+                                fontSize: 20,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  const Expanded(
-                    flex: 1,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(40.0, 0, 0, 0),
-                          child: Text(
-                            "Connectez-vous pour continuer",
-                            style: TextStyle(
-                              color: Color(0xFF696969),
-                              height: 1.4,
-                              fontSize: 20,
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: CustomTextField(
-                          label: 'Nom',
-                          controller: nameController,
-                        ),
-                      )),
-                  Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: CustomTextField(
-                          label: 'Mot de passe',
-                          controller: passwordController,
-                        ),
-                      )),
-                  Expanded(
-                      flex: 2,
-                      child: SizedBox(
-                        // flex: 3,
+                    Expanded(
+                        flex: 2,
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 50.0, vertical: 40.0),
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            child: const Text("Se connecter"),
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: CustomTextField(
+                            label: 'Nom',
+                            controller: nameController,
                           ),
-                        ),
-                      )),
-                ],
+                        )),
+                    Expanded(
+                        flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: CustomTextField(
+                            label: 'Mot de passe',
+                            controller: passwordController,
+                          ),
+                        )),
+                    Expanded(
+                        flex: 2,
+                        child: SizedBox(
+                          // flex: 3,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 50.0, vertical: 40.0),
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              child: const Text("Se connecter"),
+                            ),
+                          ),
+                        )),
+                  ],
+                ),
               ),
             )
           ],
