@@ -1,103 +1,127 @@
 import 'package:flutter/material.dart';
 
-Column _buildButtonColumn(Color color, IconData icon, String label) {
-  return Column(
-    mainAxisSize: MainAxisSize.min,
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Icon(icon, color: color),
-      Container(
-        margin: const EdgeInsets.only(top: 8),
-        child: Text(
-          label,
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w400,
-            color: color,
-          ),
-        ),
-      ),
-    ],
-  );
-}
+import 'ui/customtextfield.dart';
 
-Widget titleSection = Container(
-  padding: const EdgeInsets.all(32),
-  child: Row(
-    children: [
-      Expanded(
-        /*1*/
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            /*2*/
-            Container(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: const Text(
-                'Oeschinen Lake Campground',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            Text(
-              'Kandersteg, Switzerland',
-              style: TextStyle(
-                color: Colors.grey[500],
-              ),
-            ),
-          ],
-        ),
-      ),
-      /*3*/
-      Icon(
-        Icons.star,
-        color: Colors.red[500],
-      ),
-      const Text('41'),
-    ],
-  ),
-);
+Color primaryColor = const Color(0xFF1CA9C9);
+Color secondaryColor = const Color(0xFF696969);
+Color tertiaryColor = const Color(0xFFE5E4E2);
 
-Widget textSection = const Padding(
-  padding: EdgeInsets.all(32),
-  child: Text(
-    'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
-    'Alps. Situated 1,578 meters above sea level, it is one of the '
-    'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
-    'half-hour walk through pastures and pine forest, leads you to the '
-    'lake, which warms to 20 degrees Celsius in the summer. Activities '
-    'enjoyed here include rowing, and riding the summer toboggan run.',
-    softWrap: true,
-  ),
-);
-
-void main() => runApp(const LoginScreen());
+void main() => runApp(LoginScreen());
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
+
+  final nameController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     Color color = Theme.of(context).primaryColor;
 
-    Widget buttonSection = Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        _buildButtonColumn(color, Icons.call, 'CALL'),
-        _buildButtonColumn(color, Icons.near_me, 'ROUTE'),
-        _buildButtonColumn(color, Icons.share, 'SHARE'),
-      ],
-    );
-
     return MaterialApp(
-      title: 'Flutter layout demo',
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Flutter layout demo'),
-        ),
-        body: Column(
-          children: [titleSection, buttonSection, textSection],
+        body: ListView(
+          children: <Widget>[
+            SizedBox(
+              height: MediaQuery.of(context).size.height - 50,
+              child: Flex(
+                direction: Axis.vertical,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                      flex: 1,
+                      child: Row(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              style: TextButton.styleFrom(
+                                  foregroundColor: Colors.grey.shade900),
+                              child: const Icon(Icons.arrow_back, size: 32),
+                            ),
+                          ),
+                        ],
+                      )),
+                  const Expanded(
+                    flex: 1,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(40.0, 0, 0, 0),
+                          child: Text(
+                            "Bienvenue !",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 32,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Expanded(
+                    flex: 1,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(40.0, 0, 0, 0),
+                          child: Text(
+                            "Connectez-vous pour continuer",
+                            style: TextStyle(
+                              color: Color(0xFF696969),
+                              height: 1.4,
+                              fontSize: 20,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                      flex: 2,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: CustomTextField(
+                          label: 'Nom',
+                          controller: nameController,
+                        ),
+                      )),
+                  Expanded(
+                      flex: 2,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: CustomTextField(
+                          label: 'Mot de passe',
+                          controller: passwordController,
+                        ),
+                      )),
+                  Expanded(
+                      flex: 2,
+                      child: SizedBox(
+                        // flex: 3,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 50.0, vertical: 40.0),
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            child: const Text("Se connecter"),
+                          ),
+                        ),
+                      )),
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );

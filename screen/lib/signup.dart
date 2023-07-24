@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'ui/customtextfield.dart';
 
 Color primaryColor = const Color(0xFF1CA9C9);
@@ -13,12 +14,15 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  String name = '';
-  String email = '';
-  String password = '';
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   void submitForm() {
-    // Here you can use the entered email and password
+    String name = nameController.text;
+    String email = emailController.text;
+    String password = passwordController.text;
+
     print('Name: $name');
     print('Email: $email');
     print('Password: $password');
@@ -103,31 +107,36 @@ class _SignupScreenState extends State<SignupScreen> {
                   Expanded(
                       flex: 2,
                       child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: CustomTextField(
-                            label: 'Nom', onSubmitted: (value) => name = value),
+                          label: 'Nom',
+                          controller: nameController,
+                        ),
                       )),
                   Expanded(
                       flex: 2,
                       child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: CustomTextField(
-                            label: 'E-mail',
-                            onSubmitted: (value) => email = value),
+                          label: 'E-mail',
+                          controller: emailController,
+                        ),
                       )),
                   Expanded(
                       flex: 2,
                       child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: CustomTextField(
-                            label: 'Mot de passe',
-                            onSubmitted: (value) => password = value),
+                          label: 'Mot de passe',
+                          controller: passwordController,
+                        ),
                       )),
                   Expanded(
                     flex: 3,
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 50.0),
-                      child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40.0, vertical: 50.0),
+                      child: SizedBox(
                         width: double.infinity,
                         child: FilledButton(
                           onPressed: () {

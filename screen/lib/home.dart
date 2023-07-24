@@ -89,7 +89,7 @@ class HomeScreen extends StatelessWidget {
                             child: const Text(
                               "S'inscrire",
                               style: TextStyle(
-                                color: Color(0xFF0070FF),
+                                color: Color(0xFF1CA9C9),
                                 fontSize: 20,
                                 fontFamily: 'Inter',
                                 fontWeight: FontWeight.w400,
