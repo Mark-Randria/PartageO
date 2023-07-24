@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'login.dart';
+
 import 'home.dart';
+import 'login.dart';
 import 'signup.dart';
+import 'signuptype.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +24,8 @@ class MyApp extends StatelessWidget {
       home: const HomeScreen(),
       routes: {
         '/home': (context) => const HomeScreen(),
-        '/login': (context) => const LoginScreen(),
+        '/login': (context) => LoginScreen(),
+        '/signuptype': (context) => const SignUpTypeScreen(),
         '/signup': (context) => const SignupScreen(),
       },
     );
