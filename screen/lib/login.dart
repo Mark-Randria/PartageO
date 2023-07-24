@@ -97,11 +97,7 @@ class LoginScreen extends StatelessWidget {
           title: const Text('Flutter layout demo'),
         ),
         body: Column(
-          children: [
-            titleSection,
-            buttonSection,
-            textSection
-          ],
+          children: [titleSection, buttonSection, textSection],
         ),
       ),
     );
