@@ -40,8 +40,8 @@ class _SignupScreenState extends State<SignupScreen> {
       home: Scaffold(
         body: ListView(
           children: <Widget>[
-            Container(
-              height: MediaQuery.of(context).size.height,
+            SizedBox(
+              height: MediaQuery.of(context).size.height - 40,
               child: Flex(
                 direction: Axis.vertical,
                 crossAxisAlignment: CrossAxisAlignment.start,
