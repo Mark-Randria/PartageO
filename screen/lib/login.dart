@@ -110,9 +110,27 @@ class LoginScreen extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 50.0, vertical: 40.0),
-                            child: ElevatedButton(
-                              onPressed: () {},
-                              child: const Text("Se connecter"),
+                            child: FilledButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/login');
+                              },
+                              style: ButtonStyle(
+                                maximumSize: const MaterialStatePropertyAll(
+                                    Size(double.infinity, 40)),
+                                backgroundColor:
+                                    MaterialStatePropertyAll(primaryColor),
+                                foregroundColor: const MaterialStatePropertyAll(
+                                    Colors.white),
+                              ),
+                              child: const Expanded(
+                                  child: Text(
+                                'Se connecter',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              )),
                             ),
                           ),
                         )),

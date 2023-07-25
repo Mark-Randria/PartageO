@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'ui/customtextfield.dart';
@@ -23,9 +24,11 @@ class _SignupScreenState extends State<SignupScreen> {
     String email = emailController.text;
     String password = passwordController.text;
 
-    print('Name: $name');
-    print('Email: $email');
-    print('Password: $password');
+    if (kDebugMode) {
+      print('Name: $name');
+      print('Email: $email');
+      print('Password: $password');
+    }
   }
 
   @override
