@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'home.dart';
 import 'login.dart';
+import 'moderatorscreen.dart';
 import 'signup.dart';
 import 'signuptype.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home: const ModeratorScreen(),
       routes: {
         '/home': (context) => const HomeScreen(),
         '/login': (context) => LoginScreen(),
