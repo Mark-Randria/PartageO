@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'ui/listviewBuilder.dart';
 
 Color primaryColor = const Color(0xFF1CA9C9);
 Color secondaryColor = const Color(0xFF696969);
@@ -147,6 +148,10 @@ class _ModeratorScreenState extends State<ModeratorScreen> {
                     },
                   ),
                 ),
+                Container(
+                  height: 200,
+                  child: const CustomListView(itemCount: 5,),
+                )
               ],
             ),
           ],
