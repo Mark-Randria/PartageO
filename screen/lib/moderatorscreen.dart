@@ -2,6 +2,8 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import 'ui/listviewBuilder.dart';
+
 Color primaryColor = const Color(0xFF1CA9C9);
 Color secondaryColor = const Color(0xFF696969);
 Color tertiaryColor = const Color(0xFFE5E4E2);
@@ -14,6 +16,8 @@ class ModeratorScreen extends StatefulWidget {
 }
 
 class _ModeratorScreenState extends State<ModeratorScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   Widget _buildRow(int idx) {
     return ListTile(
       leading: CircleAvatar(
@@ -33,6 +37,7 @@ class _ModeratorScreenState extends State<ModeratorScreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        key: _scaffoldKey,
         body: Stack(
           children: [
             Positioned.fill(
@@ -50,14 +55,19 @@ class _ModeratorScreenState extends State<ModeratorScreen> {
             ListView(
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
                       padding: EdgeInsets.symmetric(
                           vertical: 16.0, horizontal: 16.0),
-                      child: Icon(
-                        Icons.menu,
-                        size: 42,
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.menu,
+                          size: 40.0,
+                        ),
+                        onPressed: () {
+                          _scaffoldKey.currentState!.openDrawer();
+                        },
                       ),
                     ),
                   ],
@@ -147,9 +157,89 @@ class _ModeratorScreenState extends State<ModeratorScreen> {
                     },
                   ),
                 ),
+                const SizedBox(height: 10.0),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12.0),
+                  child: Container(
+                    height: 200,
+                    child: CustomListView(
+                      itemCount: 5,
+                    ),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.grey.shade300,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        topRight: Radius.circular(15),
+                        bottomLeft: Radius.circular(15),
+                        bottomRight: Radius.circular(15),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ],
+        ),
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 40.0),
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 16.0),
+                  color: tertiaryColor,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 30.0),
+                      IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.receipt_long_outlined,
+                            size: 35.0,
+                          )),
+                      const Text('Factures'),
+                      const SizedBox(height: 10.0),
+                      IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.account_circle_outlined,
+                            size: 35.0,
+                          )),
+                      const Text('Utilisateurs'),
+                      const SizedBox(height: 10.0),
+                      IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.location_pin,
+                            size: 35.0,
+                          )),
+                      const Text('Adresse'),
+                      const SizedBox(height: 10.0),
+                      IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.devices,
+                            size: 35.0,
+                          )),
+                      const Text('Matériels'),
+                      const SizedBox(height: 50.0),
+                      IconButton(
+                          onPressed: () {
+                            _scaffoldKey.currentState!.closeDrawer();
+                          },
+                          icon: Icon(
+                            Icons.close,
+                            size: 35.0,
+                          )),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
