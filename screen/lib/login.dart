@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'controller/adresse.dart';
 import 'ui/customtextfield.dart';
+import './controller/utilisateur.dart';
 
 Color primaryColor = const Color(0xFF1CA9C9);
 Color secondaryColor = const Color(0xFF696969);
@@ -112,7 +114,7 @@ class LoginScreen extends StatelessWidget {
                                 horizontal: 50.0, vertical: 40.0),
                             child: FilledButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/login');
+                                login(nameController.text, passwordController.text);                
                               },
                               style: ButtonStyle(
                                 maximumSize: const MaterialStatePropertyAll(

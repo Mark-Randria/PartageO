@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'ui/customtextfield.dart';
@@ -18,18 +17,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-
-  void submitForm() {
-    String name = nameController.text;
-    String email = emailController.text;
-    String password = passwordController.text;
-
-    if (kDebugMode) {
-      print('Name: $name');
-      print('Email: $email');
-      print('Password: $password');
-    }
-  }
+  final addressController = TextEditingController();
 
   @override
   void initState() {
@@ -134,6 +122,24 @@ class _SignupScreenState extends State<SignupScreen> {
                           controller: passwordController,
                         ),
                       )),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      child: DropdownButtonFormField(
+                        hint: const Text('Adresse'),
+                        items: [
+                          ...List.generate(
+                            5,
+                            (index) => DropdownMenuItem(
+                              value: 'Option ${index + 1}',
+                              child: Text('Option ${index + 1}'),
+                            ),
+                          ),
+                        ],
+                        onChanged: (value) {
+                          setState(() {});
+                        },
+                      ),
+                    ),
                   Expanded(
                     flex: 3,
                     child: Padding(
@@ -143,7 +149,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         width: double.infinity,
                         child: FilledButton(
                           onPressed: () {
-                            submitForm();
+                            // addUser(emailController.text, nameController.text, passwordController.text, addressController.text, true);
                           },
                           style: OutlinedButton.styleFrom(
                             shape: const StadiumBorder(),

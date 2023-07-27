@@ -8,7 +8,7 @@ import '../utils/token.dart';
 
 void login(String username, String password) async {
   var client = http.Client();
-  var url = Uri.https('${Route.routePath}/login');
+  var url = Uri.https(Route.routePath, "/login");
   try{
     var response = await client.post(url, headers: {
       "Content-type": "application/x-www-form-urlencoded",
@@ -21,6 +21,7 @@ void login(String username, String password) async {
       Map loginMap = jsonDecode(utf8.decode(response.bodyBytes));
       var tokenMap = Token(loginMap);
       setToken(tokenMap.access_token);
+      print(tokenMap.access_token);
     }
   } finally {
     client.close();
@@ -31,9 +32,9 @@ void deconnect() async {
   deleteToken();
 }
 
-Future<Utilisateur> getAllUser() async {
+Future<List> getAllUser() async {
   var client = http.Client();
-  var url = Uri.https('${Route.routePath}/user/all');
+  var url = Uri.https(Route.routePath, '/user/all');
   try{
     var token = await getToken();
     var response = await client.get(url, headers: {
@@ -41,16 +42,15 @@ Future<Utilisateur> getAllUser() async {
       'Accept': 'application/json',
       'Authorization': "Bearer $token"
     });
-    Map userMap = jsonDecode(utf8.decode(response.bodyBytes));
-    return Utilisateur(userMap);
+    return jsonDecode(utf8.decode(response.bodyBytes));
   } finally{
     client.close();
   }
 }
 
-Future<Utilisateur> getOneUserByName(String name) async {
+Future<List> getOneUserByName(String name) async {
   var client = http.Client();
-  var url = Uri.https('${Route.routePath}/user/name/$name');
+  var url = Uri.https(Route.routePath, '/user/name/$name');
   try{
     var token = await getToken();
     var response = await client.get(url, headers: {
@@ -58,16 +58,15 @@ Future<Utilisateur> getOneUserByName(String name) async {
       'Accept': 'application/json',
       'Authorization': "Bearer $token"
     });
-    Map userMap = jsonDecode(utf8.decode(response.bodyBytes));
-    return Utilisateur(userMap);
+    return jsonDecode(utf8.decode(response.bodyBytes));
   } finally {
     client.close();
   }
 }
 
-Future<Utilisateur> getOneUserByRole(Bool role) async {
+Future<List> getOneUserByRole(Bool role) async {
   var client = http.Client();
-  var url = Uri.https('${Route.routePath}/user/role/$role');
+  var url = Uri.https(Route.routePath, '/user/role/$role');
   try{
     var token = await getToken();
     var response = await client.get(url, headers: {
@@ -75,16 +74,15 @@ Future<Utilisateur> getOneUserByRole(Bool role) async {
       'Accept': 'application/json',
       'Authorization': "Bearer $token"
     });
-    Map userMap = jsonDecode(utf8.decode(response.bodyBytes));
-    return Utilisateur(userMap);
+    return jsonDecode(utf8.decode(response.bodyBytes));
   } finally{
     client.close();
   }
 }
 
-Future<Utilisateur> getOneUserById(int id) async {
+Future<List> getOneUserById(int id) async {
   var client = http.Client();
-  var url = Uri.https('${Route.routePath}/user/$id');
+  var url = Uri.https(Route.routePath, '/user/$id');
   try{
     var token = await getToken();
     var response = await client.get(url, headers: {
@@ -92,8 +90,7 @@ Future<Utilisateur> getOneUserById(int id) async {
       'Accept': 'application/json',
       'Authorization': "Bearer $token"
     });
-    Map userMap = jsonDecode(utf8.decode(response.bodyBytes));
-    return Utilisateur(userMap);
+    return jsonDecode(utf8.decode(response.bodyBytes));
   } finally{
     client.close();
   }
@@ -101,7 +98,7 @@ Future<Utilisateur> getOneUserById(int id) async {
 
 Future<Utilisateur> addUser(String E_mail, String nom_utilisateur, String mot_de_passe, int id_adresse, bool role) async {
   var client = http.Client();
-  var url = Uri.https('${Route.routePath}/user/new');
+  var url = Uri.https(Route.routePath, '/user/new');
   try{
     var response = await client.post(url, headers: {
       'Content-type': 'application/json',
@@ -122,7 +119,7 @@ Future<Utilisateur> addUser(String E_mail, String nom_utilisateur, String mot_de
 
 void deleteUser(int id) async {
   var client = http.Client();
-  var url = Uri.https('${Route.routePath}/user/delete/$id');
+  var url = Uri.https(Route.routePath, '/user/delete/$id');
   try{
     var token = await getToken();
     await client.delete(url, headers: {
@@ -137,7 +134,7 @@ void deleteUser(int id) async {
 
 Future<Utilisateur> updateUser(int id, String E_mail, String nom_utilisateur, String mot_de_passe, int id_adresse, bool role) async {
   var client = http.Client();
-  var url = Uri.https('${Route.routePath}/user/update/$id');
+  var url = Uri.https(Route.routePath, '/user/update/$id');
   try{
     var token = await getToken();
     var response = await client.put(url, headers: {
