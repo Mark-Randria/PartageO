@@ -213,14 +213,6 @@ class _ModeratorScreenState extends State<ModeratorScreen> {
                       IconButton(
                           onPressed: () {},
                           icon: Icon(
-                            Icons.location_pin,
-                            size: 35.0,
-                          )),
-                      const Text('Adresse'),
-                      const SizedBox(height: 10.0),
-                      IconButton(
-                          onPressed: () {},
-                          icon: Icon(
                             Icons.devices,
                             size: 35.0,
                           )),
@@ -237,7 +229,7 @@ class _ModeratorScreenState extends State<ModeratorScreen> {
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
