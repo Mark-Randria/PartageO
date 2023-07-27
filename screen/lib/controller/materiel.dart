@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:http/http.dart' as http;
 import 'package:partageo/model/materiel.dart';
@@ -54,7 +55,7 @@ Future<List> getMaterielById(int id) async {
   }
 }
 
-Future<Materiel> addMateriel(String nom_materiel, int duree_utilisation, int nombre_kw, int id_user ) async {
+void addMateriel(String nom_materiel, int duree_utilisation, int nombre_kw, int id_user ) async {
   var client = http.Client();
   var url = Uri.https(Route.routePath, '/material/new');
   try{
@@ -69,8 +70,6 @@ Future<Materiel> addMateriel(String nom_materiel, int duree_utilisation, int nom
       "nombre_kw": nombre_kw,
       "id_user": id_user
     }));
-    Map materialMap = jsonDecode(utf8.decode(response.bodyBytes));
-    return Materiel(materialMap);
   } finally {
     client.close();
   }
@@ -91,7 +90,7 @@ void deleteMateriel(int id) async {
   }
 }
 
-Future<Materiel> updateMateriel(int id, String nom_materiel, int duree_utilisation, int nombre_kw, int id_user ) async {
+void updateMateriel(int id, String nom_materiel, int duree_utilisation, int nombre_kw, int id_user ) async {
   var client = http.Client();
   var url = Uri.https(Route.routePath, '/material/update/$id');
   try{
@@ -106,8 +105,6 @@ Future<Materiel> updateMateriel(int id, String nom_materiel, int duree_utilisati
       "nombre_kw": nombre_kw,
       "id_user": id_user
     }));
-    Map materialMap = jsonDecode(utf8.decode(response.bodyBytes));
-    return Materiel(materialMap);
   } finally {
     client.close();
   }
