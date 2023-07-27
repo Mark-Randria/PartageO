@@ -6,9 +6,9 @@ import 'package:partageo/model/facture.dart';
 import '../utils/route.dart';
 import '../utils/token.dart';
 
-Future<Facture> getAllFacture() async {
+Future<List> getAllFacture() async {
   var client = http.Client();
-  var url = Uri.https('${Route.routePath}/invoice/all');
+  var url = Uri.https(Route.routePath, '/invoice/all');
   try{
     var token = await getToken();
     var response = await client.get(url, headers: {
@@ -16,16 +16,15 @@ Future<Facture> getAllFacture() async {
       'Accept': 'application/json',
       'Authorization': "Bearer $token"
     });
-    Map invoiceMap = jsonDecode(utf8.decode(response.bodyBytes));
-    return Facture(invoiceMap);
+    return jsonDecode(utf8.decode(response.bodyBytes));
   } finally {
     client.close();
   }
 }
 
-Future<Facture> getFactureByReference(String ref_facture) async {
+Future<List> getFactureByReference(String ref_facture) async {
   var client = http.Client();
-  var url = Uri.https('${Route.routePath}/invoice/reference/$ref_facture');
+  var url = Uri.https(Route.routePath, '/invoice/reference/$ref_facture');
   try{
     var token = await getToken();
     var response = await client.get(url, headers: {
@@ -33,16 +32,15 @@ Future<Facture> getFactureByReference(String ref_facture) async {
       'Accept': 'application/json',
       'Authorization': "Bearer $token"
     });
-    Map invoiceMap = jsonDecode(utf8.decode(response.bodyBytes));
-    return Facture(invoiceMap);
+    return jsonDecode(utf8.decode(response.bodyBytes));
   } finally {
     client.close();
   }
 }
 
-Future<Facture> getFactureByDate(String date) async {
+Future<List> getFactureByDate(String date) async {
   var client = http.Client();
-  var url = Uri.https('${Route.routePath}/invoice/date/$date');
+  var url = Uri.https(Route.routePath, '/invoice/date/$date');
   try{
     var token = await getToken();
     var response = await client.get(url, headers: {
@@ -50,8 +48,7 @@ Future<Facture> getFactureByDate(String date) async {
       'Accept': 'application/json',
       'Authorization': "Bearer $token"
     });
-    Map invoiceMap = jsonDecode(utf8.decode(response.bodyBytes));
-    return Facture(invoiceMap);
+    return jsonDecode(utf8.decode(response.bodyBytes));
   } finally {
     client.close();
   }
@@ -59,7 +56,7 @@ Future<Facture> getFactureByDate(String date) async {
 
 Future<Facture> addFacture(String ref_facture, String date, int montant, int id_adresse) async {
   var client = http.Client();
-  var url = Uri.https('${Route.routePath}/invoice/new');
+  var url = Uri.https(Route.routePath, '/invoice/new');
   try{
     var token = await getToken();
     var response = await client.post(url, headers: {

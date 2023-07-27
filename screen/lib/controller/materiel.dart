@@ -6,9 +6,9 @@ import 'package:partageo/model/materiel.dart';
 import '../utils/route.dart';
 import '../utils/token.dart';
 
-Future<Materiel> getAllMateriel() async {
+Future<List> getAllMateriel() async {
   var client = http.Client();
-  var url = Uri.https('${Route.routePath}/material/all');
+  var url = Uri.https(Route.routePath, '/material/all');
   try{
     var token = await getToken();
     var response = await client.get(url, headers: {
@@ -16,16 +16,15 @@ Future<Materiel> getAllMateriel() async {
       'Accept': 'application/json',
       'Authorization': "Bearer $token"
     });
-    Map materialMap = jsonDecode(utf8.decode(response.bodyBytes));
-    return Materiel(materialMap);
+    return jsonDecode(utf8.decode(response.bodyBytes));
   } finally {
     client.close();
   }
 }
 
-Future<Materiel> getMaterielByName(String name) async {
+Future<List> getMaterielByName(String name) async {
   var client = http.Client();
-  var url = Uri.https('${Route.routePath}/material/name/$name');
+  var url = Uri.https(Route.routePath, '/material/name/$name');
   try{
     var token = await getToken();
     var response = await client.get(url, headers: {
@@ -33,16 +32,15 @@ Future<Materiel> getMaterielByName(String name) async {
       'Accept': 'application/json',
       'Authorization': "Bearer $token"
     });
-    Map materialMap = jsonDecode(utf8.decode(response.bodyBytes));
-    return Materiel(materialMap);
+    return jsonDecode(utf8.decode(response.bodyBytes));
   } finally {
     client.close();
   }
 }
 
-Future<Materiel> getMaterielById(int id) async {
+Future<List> getMaterielById(int id) async {
   var client = http.Client();
-  var url = Uri.https('${Route.routePath}/material/$id');
+  var url = Uri.https(Route.routePath, '/material/$id');
   try{
     var token = await getToken();
     var response = await client.get(url, headers: {
@@ -50,8 +48,7 @@ Future<Materiel> getMaterielById(int id) async {
       'Accept': 'application/json',
       'Authorization': "Bearer $token"
     });
-    Map materialMap = jsonDecode(utf8.decode(response.bodyBytes));
-    return Materiel(materialMap);
+    return jsonDecode(utf8.decode(response.bodyBytes));
   } finally {
     client.close();
   }
@@ -59,7 +56,7 @@ Future<Materiel> getMaterielById(int id) async {
 
 Future<Materiel> addMateriel(String nom_materiel, int duree_utilisation, int nombre_kw, int id_user ) async {
   var client = http.Client();
-  var url = Uri.https('${Route.routePath}/material/new');
+  var url = Uri.https(Route.routePath, '/material/new');
   try{
     var token = await getToken();
     var response = await client.post(url, headers: {
@@ -81,7 +78,7 @@ Future<Materiel> addMateriel(String nom_materiel, int duree_utilisation, int nom
 
 void deleteMateriel(int id) async {
   var client = http.Client();
-  var url =  Uri.https('${Route.routePath}/material/delete/$id');
+  var url =  Uri.https(Route.routePath, '/material/delete/$id');
   try {
     var token = await getToken();
     await client.delete(url, headers: {
@@ -96,7 +93,7 @@ void deleteMateriel(int id) async {
 
 Future<Materiel> updateMateriel(int id, String nom_materiel, int duree_utilisation, int nombre_kw, int id_user ) async {
   var client = http.Client();
-  var url = Uri.https('${Route.routePath}/material/update/$id');
+  var url = Uri.https(Route.routePath, '/material/update/$id');
   try{
     var token = await getToken();
     var response = await client.put(url, headers: {
