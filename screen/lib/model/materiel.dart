@@ -1,16 +1,15 @@
 class Materiel {
-  var nom_materiel;
-  var duree_utilisation;
-  var nombre_kw;
-  var montant;
-  var nom_utilisateur;
+  String nom_materiel;
+  int duree_utilisation;
+  int nombre_kw;
+  int montant;
+  String nom_utilisateur;
 
-  Materiel(Map map) {
-    nom_materiel = map["nom_materiel"];
-    duree_utilisation = map["duree_utilisation"];
-    nombre_kw = map["nombre_kw"];
-    montant = map["montant"];
-    Map materiel_userMap = map["materiel_user"];
-    nom_utilisateur = materiel_userMap["nom_utilisateur"];
-  }
+  Materiel({
+    required this.nom_materiel,
+    required this.duree_utilisation,
+    required this.nombre_kw,
+    required this.montant,
+    required this.nom_utilisateur,
+  });
 }
