@@ -74,7 +74,7 @@ class _UsedDeviceState extends State<UsedDevice> {
                             return DropdownMenuItem<String>(
                               value: value,
                               child: Text(value,
-                                  style: const TextStyle(fontSize: 20)),
+                                  style: const TextStyle(fontSize: 18)),
                             );
                           }).toList(),
                           // set value to selected month
@@ -144,7 +144,7 @@ class _UsedDeviceState extends State<UsedDevice> {
                                   return DropdownMenuItem<String>(
                                     value: value,
                                     child: Text(value,
-                                        style: const TextStyle(fontSize: 20)),
+                                        style: const TextStyle(fontSize: 18)),
                                   );
                                 }).toList(),
                                 onChanged: (String? newValue) {
@@ -186,7 +186,7 @@ class _UsedDeviceState extends State<UsedDevice> {
                                   return DropdownMenuItem<String>(
                                     value: value,
                                     child: Text(value,
-                                        style: const TextStyle(fontSize: 20)),
+                                        style: const TextStyle(fontSize: 18)),
                                   );
                                 }).toList(),
                               ),
@@ -204,7 +204,7 @@ class _UsedDeviceState extends State<UsedDevice> {
                               consumptions: consumptions)),
                       // button to add device
                       Expanded(
-                          flex: 1,
+                          flex: 2,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -216,7 +216,15 @@ class _UsedDeviceState extends State<UsedDevice> {
                                     consumptions.add(consumption);
                                   });
                                 },
-                                child: const Text('Ajouter'),
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          const Color(0xFF1CA9C9)),
+                                ),
+                                child: const Text('Ajouter',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: Color(0xFFE5E4E2))),
                               ),
                             ],
                           )),
