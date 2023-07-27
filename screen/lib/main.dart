@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const ModeratorScreen(),
+      home: const HomeScreen(),
       routes: {
         '/home': (context) => const HomeScreen(),
         '/login': (context) => LoginScreen(),

@@ -1,3 +1,3 @@
 class Route {
-  static const String routePath = "flutter-1-g9635538.deta.app";
+  static const String routePath = "flutter-1-u4669848.deta.app";
 }
