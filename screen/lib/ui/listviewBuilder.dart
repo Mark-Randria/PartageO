@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomListView extends StatelessWidget {
   final int itemCount;
+
   const CustomListView({super.key, required this.itemCount});
 
   @override
@@ -9,8 +10,8 @@ class CustomListView extends StatelessWidget {
     return ListView.builder(
       itemCount: itemCount,
       itemBuilder: (context, index) {
-        return ListTile(
-          title: Text('Item $index'),
+        return Column(
+          children: [ListTile(title: Text('Item $index')), const Divider()],
         );
       },
     );
