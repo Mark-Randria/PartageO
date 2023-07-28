@@ -1,16 +1,17 @@
 class Utilisateur {
-    var nom_utilisateur;
-    var nom_adresse;
-    var montant_payer;
+    String nom_utilisateur;
+    String nom_adresse;
+    int montant_payer;
+    int montant_rano;
     var user_materiel;
     
-  Utilisateur(Map map) {
-    nom_utilisateur = map["nom_utilisateur"];
-    Map user_adresse = map["user_adresse"];
-    nom_adresse = user_adresse["nom_adresse"];
-    user_materiel = map["user_materiel"];
-    montant_payer = map["montant_payer"];
-  }
+  Utilisateur ({
+    required this.nom_utilisateur,
+    required this.nom_adresse,
+    required this.montant_payer,
+    required this.montant_rano,
+    required this.user_materiel
+  });
 }
 
 class Token {
