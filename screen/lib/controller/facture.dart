@@ -6,7 +6,7 @@ import 'package:partageo/model/facture.dart';
 import '../utils/route.dart';
 import '../utils/token.dart';
 
-Future<List> getAllFacture() async {
+  Future<List> getAllFacture() async {
   var client = http.Client();
   var url = Uri.https(Route.routePath, '/invoice/all');
   try{
@@ -54,7 +54,7 @@ Future<List> getFactureByDate(String date) async {
   }
 }
 
-Future<Facture> addFacture(String ref_facture, String date, int montant, int id_adresse) async {
+void addFacture(String ref_facture, String date, int montant, int rano, int id_adresse) async {
   var client = http.Client();
   var url = Uri.https(Route.routePath, '/invoice/new');
   try{
@@ -66,11 +66,10 @@ Future<Facture> addFacture(String ref_facture, String date, int montant, int id_
     }, body: jsonEncode({
       "ref_facture": ref_facture,
       "date": date,
+      "rano": rano,
       "montant": montant,
       "id_adresse": id_adresse
     }));
-    Map factureMap = jsonDecode(utf8.decode(response.bodyBytes));
-    return Facture(factureMap);
   } finally {
     client.close();
   }
