@@ -146,3 +146,11 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
+
+_displaySnackBar(BuildContext context) {
+  const snackBar = SnackBar(
+    content: Text('Veuillez remplir tous les champs'),
+    backgroundColor: Colors.red,
+  );
+  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+}
