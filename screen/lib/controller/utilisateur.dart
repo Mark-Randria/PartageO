@@ -96,7 +96,7 @@ Future<List> getOneUserById(int id) async {
   }
 }
 
-Future<Utilisateur> addUser(String E_mail, String nom_utilisateur, String mot_de_passe, int id_adresse, bool role) async {
+void addUser(String E_mail, String nom_utilisateur, String mot_de_passe, int id_adresse, bool role) async {
   var client = http.Client();
   var url = Uri.https(Route.routePath, '/user/new');
   try{
@@ -110,8 +110,6 @@ Future<Utilisateur> addUser(String E_mail, String nom_utilisateur, String mot_de
         "id_adresse": id_adresse,
         "role": role
     }));
-    Map userMap = jsonDecode(utf8.decode(response.bodyBytes));
-    return Utilisateur(userMap);
   } finally {
     client.close();
   }
@@ -132,7 +130,7 @@ void deleteUser(int id) async {
   }
 }
 
-Future<Utilisateur> updateUser(int id, String E_mail, String nom_utilisateur, String mot_de_passe, int id_adresse, bool role) async {
+void updateUser(int id, String E_mail, String nom_utilisateur, String mot_de_passe, int id_adresse, bool role) async {
   var client = http.Client();
   var url = Uri.https(Route.routePath, '/user/update/$id');
   try{
@@ -148,8 +146,6 @@ Future<Utilisateur> updateUser(int id, String E_mail, String nom_utilisateur, St
       "id_adresse": id_adresse,
       "role": role
     }));
-    Map userMap = jsonDecode(utf8.decode(response.bodyBytes));
-    return Utilisateur(userMap);
   } finally {
     client.close();
   }
