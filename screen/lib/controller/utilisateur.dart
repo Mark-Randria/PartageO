@@ -58,7 +58,7 @@ Future<Utilisateur> getOneUserByName(String name) async {
       'Accept': 'application/json',
       'Authorization': "Bearer $token"
     });
-    var body = jsonDecode(response.body);
+    var body = jsonDecode(utf8.decode(response.bodyBytes));
     return Utilisateur.fromJson(body);
   } finally {
     client.close();
