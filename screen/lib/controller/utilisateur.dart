@@ -48,7 +48,7 @@ Future<List> getAllUser() async {
   }
 }
 
-Future<List> getOneUserByName(String name) async {
+Future<Utilisateur> getOneUserByName(String name) async {
   var client = http.Client();
   var url = Uri.https(Route.routePath, '/user/name/$name');
   try{
@@ -58,13 +58,14 @@ Future<List> getOneUserByName(String name) async {
       'Accept': 'application/json',
       'Authorization': "Bearer $token"
     });
-    return jsonDecode(utf8.decode(response.bodyBytes));
+    var body = jsonDecode(response.body);
+    return Utilisateur.fromJson(body);
   } finally {
     client.close();
   }
 }
 
-Future<List> getOneUserByRole(Bool role) async {
+Future<List<Utilisateur>> getOneUserByRole(Bool role) async {
   var client = http.Client();
   var url = Uri.https(Route.routePath, '/user/role/$role');
   try{
@@ -74,7 +75,8 @@ Future<List> getOneUserByRole(Bool role) async {
       'Accept': 'application/json',
       'Authorization': "Bearer $token"
     });
-    return jsonDecode(utf8.decode(response.bodyBytes));
+    var body = jsonDecode(response.body);
+    return List<Utilisateur>.from(body.map((e) => Utilisateur.fromJson(e)));
   } finally{
     client.close();
   }

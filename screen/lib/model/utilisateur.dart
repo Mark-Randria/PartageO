@@ -1,17 +1,26 @@
 class Utilisateur {
-    String nom_utilisateur;
-    String nom_adresse;
-    int montant_payer;
-    int montant_rano;
-    var user_materiel;
+    String? nomUtilisateur;
+    String? nomAdresse;
+    int? montantPayer;
+    int? montantRano;
+    var userMateriel;
     
   Utilisateur ({
-    required this.nom_utilisateur,
-    required this.nom_adresse,
-    required this.montant_payer,
-    required this.montant_rano,
-    required this.user_materiel
+    this.nomUtilisateur,
+    this.nomAdresse,
+    this.montantPayer,
+    this.montantRano,
+    this.userMateriel
   });
+
+  Utilisateur.fromJson(Map<String, dynamic> json) {
+    nomUtilisateur = json['nom_utilisateur'];
+    nomAdresse = json['nom_adresse'];
+    montantPayer = json['montant_payer'];
+    montantRano = json['montant_rano'];
+    userMateriel = json['user_materiel'];
+  }
+
 }
 
 class Token {
