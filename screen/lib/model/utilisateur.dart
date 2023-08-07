@@ -15,7 +15,7 @@ class Utilisateur {
 
   Utilisateur.fromJson(Map<String, dynamic> json) {
     nomUtilisateur = json['nom_utilisateur'];
-    nomAdresse = json['nom_adresse'];
+    nomAdresse = json['user_adresse']['nom_adresse'];
     montantPayer = json['montant_payer'];
     montantRano = json['montant_rano'];
     userMateriel = json['user_materiel'];

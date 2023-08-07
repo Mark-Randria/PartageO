@@ -3,6 +3,7 @@ import 'dart:ffi';
 
 import 'package:http/http.dart' as http;
 import 'package:partageo/model/utilisateur.dart';
+
 import '../utils/route.dart';
 import '../utils/token.dart';
 
@@ -51,7 +52,7 @@ Future<List> getAllUser() async {
 Future<Utilisateur> getOneUserByName(String name) async {
   var client = http.Client();
   var url = Uri.https(Route.routePath, '/user/name/$name');
-  try{
+  try {
     var token = await getToken();
     var response = await client.get(url, headers: {
       'Content-type': 'application/json',
@@ -59,7 +60,7 @@ Future<Utilisateur> getOneUserByName(String name) async {
       'Authorization': "Bearer $token"
     });
     var body = jsonDecode(utf8.decode(response.bodyBytes));
-    return Utilisateur.fromJson(body);
+    return Utilisateur.fromJson(body[0]);
   } finally {
     client.close();
   }
