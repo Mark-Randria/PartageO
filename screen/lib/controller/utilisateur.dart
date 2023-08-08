@@ -7,7 +7,7 @@ import 'package:partageo/model/utilisateur.dart';
 import '../utils/route.dart';
 import '../utils/token.dart';
 
-void login(String username, String password) async {
+Future<bool> login(String username, String password) async {
   var client = http.Client();
   var url = Uri.https(Route.routePath, "/login");
   try{
@@ -22,7 +22,10 @@ void login(String username, String password) async {
       Map loginMap = jsonDecode(utf8.decode(response.bodyBytes));
       var tokenMap = Token(loginMap);
       setToken(tokenMap.access_token);
-      print(tokenMap.access_token);
+      return true;
+    }
+    else {
+      return false;
     }
   } finally {
     client.close();

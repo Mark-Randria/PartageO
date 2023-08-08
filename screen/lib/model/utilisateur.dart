@@ -1,8 +1,8 @@
 class Utilisateur {
     String? nomUtilisateur;
     String? nomAdresse;
-    int? montantPayer;
-    int? montantRano;
+    double? montantPayer;
+    double? montantRano;
     var userMateriel;
     
   Utilisateur ({

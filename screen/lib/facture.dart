@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 
+import 'constant/global.dart';
 import 'controller/utilisateur.dart';
 import 'model/materiel.dart';
 import 'utils/token.dart';
@@ -20,25 +22,8 @@ class FactureScreen extends StatefulWidget {
 class _FactureScreenState extends State<FactureScreen> {
   List<String> names = ['Jiro', 'Rano'];
   List<int> amounts = [350000, 50000];
-  List<Materiel> materiel = [];
   List<dynamic> info1 = [];
   int counter = 0;
-
-  Materiel materiel1 = Materiel(
-    nom_materiel: "ordinateur",
-    duree_utilisation: 10,
-    nombre_kw: 20,
-    montant: 200000,
-    nom_utilisateur: "Jiro",
-  );
-
-  Materiel materiel2 = Materiel(
-    nom_materiel: "phone",
-    duree_utilisation: 10,
-    nombre_kw: 12,
-    montant: 20000,
-    nom_utilisateur: "Landry",
-  );
 
   @override
   void initState() {
@@ -55,30 +40,36 @@ class _FactureScreenState extends State<FactureScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(child:  FutureBuilder(
-      future: fetchData(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          return Scaffold(
-              body: Center(child: Text('Error: ${snapshot.error}')));
-        } else {
+    return WillPopScope(
+      child: FutureBuilder(
+        future: fetchData(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Scaffold(
+                body: Center(child: Text('Error: ${snapshot.error}')));
+          } else if (!snapshot.hasData) {
+            return Center(child: Text('still fetching data'));
+          } else {
+            final retrievedData = snapshot.data;
+            final user = retrievedData.nomUtilisateur;
+            final userAdress = retrievedData.nomAdresse;
+            double? jiro = retrievedData.montantPayer;
+            double? rano = retrievedData.montantRano;
+            double? total = jiro! + rano!;
+            final materiel = retrievedData.userMateriel;
 
-          final retrievedData = snapshot.data;
-          final user = retrievedData.nomUtilisateur;
-          final userAdress = retrievedData.nomAdresse;
-
-          return Scaffold(
-            body: ListView(
-              children: [
-                Column(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                      height: 260.0,
-                      width: MediaQuery.of(context).size.width,
-                      color: primaryColor,
+            return Scaffold(
+              body: ListView(
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                        height: 260.0,
+                        width: MediaQuery.of(context).size.width,
+                        color: primaryColor,
                       child: Column(
                         children: [
                           Column(
@@ -137,31 +128,31 @@ class _FactureScreenState extends State<FactureScreen> {
                                         horizontal: 10.0),
                                     width: double.infinity,
                                     child: const Text(
-                                      'Facture du mois de Janvier',
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontFamily: 'Inter',
-                                        fontWeight: FontWeight.w400,
+                                      'Facture du mois',
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontFamily: 'Inter',
+                                          fontWeight: FontWeight.w400,
+                                        ),
                                       ),
-                                    ),
                                   ),
                                   const SizedBox(height: 5.0),
                                   Container(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 10.0),
-                                    width: double.infinity,
-                                    child: const Text(
-                                      '150 000 Ar',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 22,
-                                        fontFamily: 'Inter',
-                                        fontWeight: FontWeight.w500,
+                                          horizontal: 10.0),
+                                      width: double.infinity,
+                                      child: Text(
+                                        total.toString() + ' Ar',
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 22,
+                                          fontFamily: 'Inter',
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
                                     ),
-                                  ),
                                   const SizedBox(height: 16.0),
                                   Container(
                                     padding: const EdgeInsets.symmetric(
@@ -242,7 +233,7 @@ class _FactureScreenState extends State<FactureScreen> {
                               ),
                               const SizedBox(height: 8.0),
                               Text(
-                                '130 000 Ar',
+                                 jiro.toString() + ' Ar',
                                 style: TextStyle(fontSize: 15.0),
                               )
                             ],
@@ -285,7 +276,7 @@ class _FactureScreenState extends State<FactureScreen> {
                               ),
                               const SizedBox(height: 8.0),
                               Text(
-                                '20 000 Ar',
+                                rano.toString() + ' Ar',
                                 style: TextStyle(fontSize: 15.0),
                               )
                             ],
@@ -335,7 +326,7 @@ class _FactureScreenState extends State<FactureScreen> {
                                 children: [
                                   Container(
                                     child: Text(
-                                      '',
+                                      materiel[i]['nom_materiel'],
                                       style: TextStyle(
                                           fontSize: 20.0,
                                           color: Colors.grey.shade600),
@@ -345,12 +336,12 @@ class _FactureScreenState extends State<FactureScreen> {
                                       child: Column(
                                         children: [
                                           Text(
-                                            ' Ar',
+                                        (materiel[i]['nombre_kw'] * consommationKw).toString() + ' Ar',
                                             style: TextStyle(
                                                 fontSize: 18.0, color: primaryColor),
                                           ),
                                           Text(
-                                            ' kW',
+                                            materiel[i]['nombre_kw'].toString() + ' kW',
                                             style: TextStyle(
                                                 fontSize: 18.0,
                                                 color: Colors.grey.shade500),
@@ -388,28 +379,29 @@ class _FactureScreenState extends State<FactureScreen> {
             floatingActionButton: FloatingActionButton(
               shape: const CircleBorder(),
               onPressed: () {},
-              backgroundColor: primaryColor,
-              child: const Icon(
-                Icons.add,
-                size: 32.0,
-                color: Colors.white,
+                backgroundColor: primaryColor,
+                child: const Icon(
+                  Icons.add,
+                  size: 32.0,
+                  color: Colors.white,
+                ),
               ),
-            ),
-          );
-        }
-      },
-    ), onWillPop: () async {
-      final shouldPop = await showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Deconnexion'),
-            content: Text('Voulez-vous vous deconnecter?'),
-            actions: [
-              TextButton(
-                child: Text('Annuler'),
-                onPressed: () {
-                  Navigator.pop(context, false);
+            );
+          }
+        },
+      ),
+      onWillPop: () async {
+        final shouldPop = await showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text('Deconnexion'),
+              content: Text('Voulez-vous vous deconnecter?'),
+              actions: [
+                TextButton(
+                  child: Text('Annuler'),
+                  onPressed: () {
+                    Navigator.pop(context, false);
                 },
               ),
               TextButton(

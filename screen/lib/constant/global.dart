@@ -1,0 +1,1 @@
+const consommationKw = 600;
