@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'controller/adresse.dart';
-import 'ui/customtextfield.dart';
 import './controller/utilisateur.dart';
+import 'ui/customtextfield.dart';
 
 Color primaryColor = const Color(0xFF1CA9C9);
 Color secondaryColor = const Color(0xFF696969);
@@ -19,6 +18,69 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color color = Theme.of(context).primaryColor;
+
+    void loginUser() async {
+      if (nameController.text.isEmpty || passwordController.text.isEmpty) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Erreur'),
+              content: Text('Veuillez completer les champs.'),
+              actions: [
+                TextButton(
+                  child: Text('OK'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+        return;
+      }
+
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return const AlertDialog(
+            content: Row(
+              children: [
+                CircularProgressIndicator(),
+                SizedBox(width: 16.0),
+                Text('Veuillez patienter...'),
+              ],
+            ),
+          );
+        },
+      );
+
+      final connect = await login(nameController.text, passwordController.text);
+
+      if (connect) {
+        Navigator.pushNamed(context, '/facture');
+      } else {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Erreur'),
+              content: Text('Connexion echoue. Verifier les valeurs insere'),
+              actions: [
+                TextButton(
+                  child: Text('OK'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
+    }
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -114,7 +176,7 @@ class LoginScreen extends StatelessWidget {
                                 horizontal: 50.0, vertical: 40.0),
                             child: FilledButton(
                               onPressed: () {
-                                login(nameController.text, passwordController.text);                                  
+                                loginUser();
                               },
                               style: ButtonStyle(
                                 maximumSize: const MaterialStatePropertyAll(
@@ -145,12 +207,4 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-_displaySnackBar(BuildContext context) {
-  const snackBar = SnackBar(
-    content: Text('Veuillez remplir tous les champs'),
-    backgroundColor: Colors.red,
-  );
-  ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }

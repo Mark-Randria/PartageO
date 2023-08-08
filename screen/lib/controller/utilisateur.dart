@@ -3,10 +3,11 @@ import 'dart:ffi';
 
 import 'package:http/http.dart' as http;
 import 'package:partageo/model/utilisateur.dart';
+
 import '../utils/route.dart';
 import '../utils/token.dart';
 
-void login(String username, String password) async {
+Future<bool> login(String username, String password) async {
   var client = http.Client();
   var url = Uri.https(Route.routePath, "/login");
   try{
@@ -21,7 +22,10 @@ void login(String username, String password) async {
       Map loginMap = jsonDecode(utf8.decode(response.bodyBytes));
       var tokenMap = Token(loginMap);
       setToken(tokenMap.access_token);
-      print(tokenMap.access_token);
+      return true;
+    }
+    else {
+      return false;
     }
   } finally {
     client.close();
@@ -48,23 +52,24 @@ Future<List> getAllUser() async {
   }
 }
 
-Future<List> getOneUserByName(String name) async {
+Future<Utilisateur> getOneUserByName(String name) async {
   var client = http.Client();
   var url = Uri.https(Route.routePath, '/user/name/$name');
-  try{
+  try {
     var token = await getToken();
     var response = await client.get(url, headers: {
       'Content-type': 'application/json',
       'Accept': 'application/json',
       'Authorization': "Bearer $token"
     });
-    return jsonDecode(utf8.decode(response.bodyBytes));
+    var body = jsonDecode(utf8.decode(response.bodyBytes));
+    return Utilisateur.fromJson(body[0]);
   } finally {
     client.close();
   }
 }
 
-Future<List> getOneUserByRole(Bool role) async {
+Future<List<Utilisateur>> getOneUserByRole(Bool role) async {
   var client = http.Client();
   var url = Uri.https(Route.routePath, '/user/role/$role');
   try{
@@ -74,7 +79,8 @@ Future<List> getOneUserByRole(Bool role) async {
       'Accept': 'application/json',
       'Authorization': "Bearer $token"
     });
-    return jsonDecode(utf8.decode(response.bodyBytes));
+    var body = jsonDecode(response.body);
+    return List<Utilisateur>.from(body.map((e) => Utilisateur.fromJson(e)));
   } finally{
     client.close();
   }
