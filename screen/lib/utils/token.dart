@@ -1,11 +1,12 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 
-Future<bool> setToken(String value) async {
+Future setToken(String value) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   return prefs.setString('token', value);
 }
 
-Future<String?> getToken() async {
+Future getToken() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   return prefs.getString('token');
 }
@@ -13,4 +14,9 @@ Future<String?> getToken() async {
 void deleteToken() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.remove('token');
+}
+
+dynamic decodeToken(token) {
+  final jwt = JWT.decode(token);
+  return jwt.payload;
 }
