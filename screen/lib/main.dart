@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:partageo/used_device.dart';
 import 'dart:io';
 
 import 'utils/token.dart';
+import 'addmateriel.dart';
+import 'listfacture.dart';
+import 'listmateriel.dart';
+import 'listUtilisateur.dart';
+import 'materielmodification.dart';
+import 'moderatorfacture.dart';
+import 'moderatorscreen.dart';
+import 'modification_page.dart';
+import 'modificationfacture.dart';
+import 'used_device.dart';
+
 import 'home.dart';
 import 'login.dart';
 import 'signup.dart';
-import 'signuptype.dart';
 import 'facture.dart';
 
 class MyHttpOverrides extends HttpOverrides {
@@ -53,13 +62,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
+      // home: AddMaterielScreen(),
       initialRoute: initialRoute ?? '/home',
       routes: {
         '/home': (context) => const HomeScreen(),
         '/login': (context) => LoginScreen(),
         '/facture': (context) => const FactureScreen(),
-        '/signuptype': (context) => const SignUpTypeScreen(),
         '/signup': (context) => const SignupScreen(),
+        '/addmateriel': (context) => const AddMaterielScreen(),
+        '/useddevice': (context) => const UsedDevice(),
+        '/listfacture': (context) => ListFactureScreen(),
+        '/listmateriel': (context) => const ListMaterielScreen(),
       },
     );
   }

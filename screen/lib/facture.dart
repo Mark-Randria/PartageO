@@ -57,8 +57,15 @@ class _FactureScreenState extends State<FactureScreen> {
             final userAdress = retrievedData.nomAdresse;
             double? jiro = retrievedData.montantPayer;
             double? rano = retrievedData.montantRano;
-            double? total = jiro! + rano!;
             final materiel = retrievedData.userMateriel;
+
+            double totaljiro = 0.0;
+
+            for (int i = 0; i < materiel.length; i++) {
+              totaljiro += materiel[i]['nombre_kw'] * consommationKw;
+            }
+
+            double total = totaljiro + rano!;
 
             return Scaffold(
               body: ListView(
@@ -67,7 +74,7 @@ class _FactureScreenState extends State<FactureScreen> {
                     children: [
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                        height: 260.0,
+                        height: 200.0,
                         width: MediaQuery.of(context).size.width,
                         color: primaryColor,
                       child: Column(
@@ -153,53 +160,6 @@ class _FactureScreenState extends State<FactureScreen> {
                                         ),
                                       ),
                                     ),
-                                  const SizedBox(height: 16.0),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10.0),
-                                    width: double.infinity,
-                                    child: const Text(
-                                      "Total des factures de l'adresse :",
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontFamily: 'Inter',
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 5.0),
-                                  Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10.0),
-                                      width: double.infinity,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          const Text(
-                                            "Jiro : 350 000 Ar",
-                                            textAlign: TextAlign.start,
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 18,
-                                              fontFamily: 'Inter',
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                          const Text(
-                                            "Rano : 50 000 Ar",
-                                            textAlign: TextAlign.start,
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 18,
-                                              fontFamily: 'Inter',
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                        ],
-                                      )),
                                 ],
                               )
                             ],
@@ -233,7 +193,7 @@ class _FactureScreenState extends State<FactureScreen> {
                               ),
                               const SizedBox(height: 8.0),
                               Text(
-                                 jiro.toString() + ' Ar',
+                                 totaljiro.toString() + ' Ar',
                                 style: TextStyle(fontSize: 15.0),
                               )
                             ],
@@ -378,7 +338,9 @@ class _FactureScreenState extends State<FactureScreen> {
             ),
             floatingActionButton: FloatingActionButton(
               shape: const CircleBorder(),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/addmateriel');
+              },
                 backgroundColor: primaryColor,
                 child: const Icon(
                   Icons.add,
