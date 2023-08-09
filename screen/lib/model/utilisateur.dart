@@ -1,6 +1,7 @@
 class Utilisateur {
     String? nomUtilisateur;
     String? nomAdresse;
+    int? idAdresse;
     double? montantPayer;
     double? montantRano;
     var userMateriel;
@@ -8,6 +9,7 @@ class Utilisateur {
   Utilisateur ({
     this.nomUtilisateur,
     this.nomAdresse,
+    this.idAdresse,
     this.montantPayer,
     this.montantRano,
     this.userMateriel
@@ -16,6 +18,7 @@ class Utilisateur {
   Utilisateur.fromJson(Map<String, dynamic> json) {
     nomUtilisateur = json['nom_utilisateur'];
     nomAdresse = json['user_adresse']['nom_adresse'];
+    idAdresse = json['user_adresse']['id'];
     montantPayer = json['montant_payer'];
     montantRano = json['montant_rano'];
     userMateriel = json['user_materiel'];

@@ -1,11 +1,15 @@
 class Adresse {
-  String nom_adresse;
+  String? nomAdresse;
   var adresse_user;
   var adresse_facture;
   
   Adresse ({
-    required this.nom_adresse,
-    required this.adresse_user,
-    required this.adresse_facture
+    this.nomAdresse,
+    this.adresse_user,
+    this.adresse_facture
   });
+
+  Adresse.fromJson(Map<String, dynamic> json) {
+    nomAdresse = json['nom_adresse'];
+  }
 }

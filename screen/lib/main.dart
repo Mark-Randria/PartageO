@@ -11,7 +11,9 @@ import 'moderatorfacture.dart';
 import 'moderatorscreen.dart';
 import 'modification_page.dart';
 import 'modificationfacture.dart';
+import 'modifmateriel.dart';
 import 'used_device.dart';
+import 'address.dart';
 
 import 'home.dart';
 import 'login.dart';
@@ -65,7 +67,10 @@ class MyApp extends StatelessWidget {
       // home: AddMaterielScreen(),
       initialRoute: initialRoute ?? '/home',
       routes: {
-        '/home': (context) => const HomeScreen(),
+        // '/home': (context) => const HomeScreen(),
+        '/home': (context) => const AddAdressScreen(),
+        '/moderatorscreen': (context) => const ModeratorScreen(),
+        '/modifmateriel': (context) => EditMaterielScreen(),
         '/login': (context) => LoginScreen(),
         '/facture': (context) => const FactureScreen(),
         '/signup': (context) => const SignupScreen(),

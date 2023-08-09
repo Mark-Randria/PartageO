@@ -67,7 +67,7 @@ class LoginScreen extends StatelessWidget {
           builder: (BuildContext context) {
             return AlertDialog(
               title: Text('Erreur'),
-              content: Text('Connexion echoue. Verifier les valeurs insere'),
+              content: Text('Connexion echoue. Verifier les valeurs inserés'),
               actions: [
                 TextButton(
                   child: Text('OK'),
