@@ -83,6 +83,7 @@ class MyApp extends StatelessWidget {
         '/listmateriel': (context) => const ListMaterielScreen(),
         '/adresse': (context) => AddAdressScreen(),
         '/listuser': (context) => ListUserScreen(),
+        '/listfacture': (context) => ListFactureScreen(),
       },
     );
   }

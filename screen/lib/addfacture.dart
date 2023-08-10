@@ -19,6 +19,8 @@ class AddFactureScreen extends StatefulWidget {
 }
 
 class _AddFactureScreenState extends State<AddFactureScreen> {
+  String selectedUser = '';
+
   final factureController = TextEditingController();
   final DateController = TextEditingController();
   final montantController = TextEditingController();
@@ -29,11 +31,11 @@ class _AddFactureScreenState extends State<AddFactureScreen> {
   Future fetchData() async {
     final token = await getToken();
     final decodedToken = decodeToken(token);
-    print(decodedToken);
     final adresse = await getAdresse();
 
     return adresse;
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class _AddFactureScreenState extends State<AddFactureScreen> {
       print(decodedToken);
       if (factureController.text.isEmpty ||
           DateController.text.isEmpty || ranoController.text.isEmpty ||
-          montantController.text.isEmpty || idadresseController.text.isEmpty || nomadresseController.text.isEmpty) {
+          montantController.text.isEmpty || idadresseController.text.isEmpty ) {
         showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -68,7 +70,8 @@ class _AddFactureScreenState extends State<AddFactureScreen> {
         final date = DateController.text;
         final montant = int.parse(montantController.text);
         final rano = int.parse(ranoController.text);
-        final nomAdresse = nomadresseController.text;
+
+
         final idAdresse = int.parse(idadresseController.text);
         addFacture(refFact, date, montant, rano, idAdresse);
         showDialog(
@@ -102,7 +105,8 @@ class _AddFactureScreenState extends State<AddFactureScreen> {
         } else if (!snapshot.hasData) {
           return Center(child: Text('still fetching data'));
         } else {
-          final adresse = snapshot.data[0];
+          final factureList = snapshot.data;
+          print(factureList);
           return Scaffold(
               appBar: AppBar(
                 leading: const BackButton(),
@@ -131,10 +135,10 @@ class _AddFactureScreenState extends State<AddFactureScreen> {
                           ),
                           OutlinedButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, '/listadresse');
+                              Navigator.pushNamed(context, '/listfacture');
                             },
                             style: OutlinedButton.styleFrom(
-                              maximumSize: const Size(258.0, 50.0),
+                              maximumSize: const Size(228.0, 50.0),
                             ),
                             child: Row(
                               children: [
@@ -142,7 +146,7 @@ class _AddFactureScreenState extends State<AddFactureScreen> {
                                 const SizedBox(
                                   width: 8.0,
                                 ),
-                                const Text('Listes des addresses'),
+                                const Text('Listes des factures'),
                               ],
                             ),
                           ),
@@ -234,7 +238,44 @@ class _AddFactureScreenState extends State<AddFactureScreen> {
                       )
                   ),
                   const SizedBox(height: 20.0),
-
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: TextField(
+                      onTap: () {
+                        _showUserPicker(context, factureList);
+                      },
+                      readOnly: true,
+                      controller: TextEditingController(text: selectedUser),
+                      decoration: InputDecoration(
+                        labelText: 'Selectionner une adresse',
+                        suffixIcon: Icon(Icons.arrow_drop_down),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20.0),
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          FilledButton(
+                            onPressed: () {
+                              AddingFacture();
+                            },
+                            style: ButtonStyle(
+                                backgroundColor:
+                                MaterialStateProperty.all<Color>(primaryColor)),
+                            child: Row(
+                              children: [
+                                const Text('Ajouter'),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 20.0),
+                        ],
+                      )
+                    ],
+                  ),
                   const SizedBox(height: 30.0),
                 ],
               ));
@@ -242,4 +283,32 @@ class _AddFactureScreenState extends State<AddFactureScreen> {
       },
     );
   }
+
+  void _showUserPicker(BuildContext context, List<dynamic> factureList) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Selectionner une addresse'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              for (final facture in factureList)
+                ListTile(
+                  title: Text(facture['nom_adresse']),
+                  onTap: () {
+                    setState(() {
+                      selectedUser = facture['nom_adresse'];
+                      idadresseController.text = facture['id'].toString();
+                    });
+                    Navigator.pop(context); // Close the dialog
+                  },
+                ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
 }
