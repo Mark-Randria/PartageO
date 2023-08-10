@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:partageo/addfacture.dart';
+import 'package:partageo/listuser.dart';
 import 'dart:io';
 
 import 'utils/token.dart';
@@ -81,6 +82,7 @@ class MyApp extends StatelessWidget {
         '/listfacture': (context) => ListFactureScreen(),
         '/listmateriel': (context) => const ListMaterielScreen(),
         '/adresse': (context) => AddAdressScreen(),
+        '/listuser': (context) => ListUserScreen(),
       },
     );
   }

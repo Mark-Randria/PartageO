@@ -168,7 +168,9 @@ class _ModeratorScreenState extends State<ModeratorScreen> {
                               const Text('Adresse'),
                               const SizedBox(height: 10.0),
                               IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, '/listuser');
+                                  },
                                   icon: Icon(
                                     Icons.account_circle_outlined,
                                     size: 35.0,
