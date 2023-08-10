@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:partageo/utils/token.dart';
 
 import './controller/utilisateur.dart';
 import 'ui/customtextfield.dart';
@@ -60,14 +61,21 @@ class LoginScreen extends StatelessWidget {
       final connect = await login(nameController.text, passwordController.text);
 
       if (connect) {
-        Navigator.pushNamed(context, '/facture');
+        final token = getToken();
+        final decodedToken = decodeToken(token);
+        if (decodedToken['role'] == true) {
+          Navigator.pushNamed(context, '/facture');
+        }
+        else {
+          Navigator.pushNamed(context, '/moderatorscreen');
+        }
       } else {
         showDialog(
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
               title: Text('Erreur'),
-              content: Text('Connexion echoue. Verifier les valeurs insere'),
+              content: Text('Connexion echoue. Verifier les valeurs inserés'),
               actions: [
                 TextButton(
                   child: Text('OK'),

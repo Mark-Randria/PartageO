@@ -1,16 +1,26 @@
 class Facture {
-  var ref_facture;
-  var date;
-  var montant;
-  var nom_adresse;
-  var rano;
+  String? refFacture;
+  String? dateFacture;
+  double? montant;
+  double? rano;
+  String? nomAdresse;
+  int? idAdresse;
 
-  Facture (Map map){
-    ref_facture = map["ref_facture"];
-    date = map["date"];
-    montant = map["montant"];
-    rano = map["rano"];
-    Map facture_adresse = map["facture_adresse"];
-    nom_adresse = facture_adresse["nom_adresse"];
+  Facture ({
+    this.refFacture,
+    this.dateFacture,
+    this.montant,
+    this.rano,
+    this.nomAdresse,
+    this.idAdresse
+  });
+
+  Facture.fromJson(json) {
+    refFacture = json['ref_facture'];
+    dateFacture = json['date_facture'];
+    montant = json['montant'];
+    rano = json['rano'];
+    nomAdresse = json['facture_adresse']['nom_adresse'];
+    idAdresse = json['facture_adresse']['id'];
   }
 }

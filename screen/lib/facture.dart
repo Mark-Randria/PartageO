@@ -33,6 +33,7 @@ class _FactureScreenState extends State<FactureScreen> {
   Future fetchData() async {
     final token = await getToken();
     final decodedToken = decodeToken(token);
+    print(decodedToken);
     final utilisateur = await getOneUserByName(decodedToken['nom'].toString());
 
     return utilisateur;
@@ -65,7 +66,7 @@ class _FactureScreenState extends State<FactureScreen> {
               totaljiro += materiel[i]['nombre_kw'] * consommationKw;
             }
 
-            double total = totaljiro + rano!;
+            double total = jiro! + rano!;
 
             return Scaffold(
               body: ListView(
@@ -193,7 +194,7 @@ class _FactureScreenState extends State<FactureScreen> {
                               ),
                               const SizedBox(height: 8.0),
                               Text(
-                                 totaljiro.toString() + ' Ar',
+                                 jiro.toString() + ' Ar',
                                 style: TextStyle(fontSize: 15.0),
                               )
                             ],
