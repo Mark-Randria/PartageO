@@ -6,7 +6,7 @@ import 'package:partageo/model/adresse.dart';
 import '../utils/route.dart';
 import '../utils/token.dart';
 
-Future<Adresse> getAdresse() async {
+Future getAdresse() async {
   var client = http.Client();
   var url = Uri.https(Route.routePath, '/adress/all');
   try {
@@ -17,7 +17,7 @@ Future<Adresse> getAdresse() async {
       'Authorization': "Bearer $token"
     });
     var result = jsonDecode(utf8.decode(response.bodyBytes));
-    return Adresse.fromJson(result);
+    return result;
   } finally {
     client.close();
   }
@@ -39,7 +39,7 @@ Future<List> getOneAdresse(int id) async {
   }
 }
 
-Future<List> addAdresse(String nom_adresse) async {
+Future<bool> addAdresse(String nom_adresse) async {
   var client = http.Client();
   var url = Uri.https(Route.routePath, '/adress/new');
   try {
@@ -49,7 +49,7 @@ Future<List> addAdresse(String nom_adresse) async {
     }, body: jsonEncode({
       "nom_address": nom_adresse
     }));
-    return jsonDecode(utf8.decode(response.bodyBytes));
+    return true;
   } finally {
     client.close();
   }
