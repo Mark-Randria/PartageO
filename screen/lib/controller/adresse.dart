@@ -1,11 +1,12 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:partageo/model/adresse.dart';
 
 import '../utils/route.dart';
 import '../utils/token.dart';
 
-Future<List> getAdresse() async {
+Future<Adresse> getAdresse() async {
   var client = http.Client();
   var url = Uri.https(Route.routePath, '/adress/all');
   try {
@@ -15,7 +16,8 @@ Future<List> getAdresse() async {
       'Accept': 'application/json',
       'Authorization': "Bearer $token"
     });
-    return jsonDecode(utf8.decode(response.bodyBytes));
+    var result = jsonDecode(utf8.decode(response.bodyBytes));
+    return Adresse.fromJson(result);
   } finally {
     client.close();
   }

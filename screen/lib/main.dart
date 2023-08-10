@@ -11,7 +11,9 @@ import 'moderatorfacture.dart';
 import 'moderatorscreen.dart';
 import 'modification_page.dart';
 import 'modificationfacture.dart';
+import 'modifmateriel.dart';
 import 'used_device.dart';
+import 'address.dart';
 
 import 'home.dart';
 import 'login.dart';
@@ -38,12 +40,12 @@ Future<String?> determineInitialRoute() async {
   String? token = await getToken();
   if (token != null) {
     Map<String, dynamic> decodedToken = decodeToken(token);
-    // Check for any conditions based on the decoded token if needed
-    // For example, check token expiration, user roles, etc.
-    // If the token is valid and meets your condition, return '/facture' route.
-    return '/facture';
+    if (decodedToken['role'] == false) {
+      return '/moderatorscreen';
+    } else if (decodedToken['role'] == true) {
+      return '/facture';
+    }
   } else {
-    // If the token doesn't exist, return the default route '/home'.
     return '/home';
   }
 }
@@ -66,6 +68,9 @@ class MyApp extends StatelessWidget {
       initialRoute: initialRoute ?? '/home',
       routes: {
         '/home': (context) => const HomeScreen(),
+        // '/home': (context) => ModeratorScreen(),
+        '/moderatorscreen': (context) => ModeratorScreen(),
+        '/modifmateriel': (context) => EditMaterielScreen(),
         '/login': (context) => LoginScreen(),
         '/facture': (context) => const FactureScreen(),
         '/signup': (context) => const SignupScreen(),

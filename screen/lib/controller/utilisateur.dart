@@ -102,7 +102,7 @@ Future<List> getOneUserById(int id) async {
   }
 }
 
-void addUser(String E_mail, String nom_utilisateur, String mot_de_passe, int id_adresse, bool role) async {
+Future<bool> addUser(String E_mail, String nom_utilisateur, String mot_de_passe, int id_adresse, bool role) async {
   var client = http.Client();
   var url = Uri.https(Route.routePath, '/user/new');
   try{
@@ -116,6 +116,7 @@ void addUser(String E_mail, String nom_utilisateur, String mot_de_passe, int id_
         "id_adresse": id_adresse,
         "role": role
     }));
+    return true;
   } finally {
     client.close();
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:partageo/controller/materiel.dart';
 
 import 'controller/utilisateur.dart';
 import 'utils/token.dart';
@@ -26,6 +27,14 @@ class _ListMaterielScreenState extends State<ListMaterielScreen> {
     final utilisateur = await getOneUserByName(decodedToken['nom'].toString());
 
     return utilisateur;
+  }
+
+  String convertNumber(double number) {
+    if (number == number.toInt()) {
+      return number.toInt().toString();
+    } else {
+      return number.toString();
+    }
   }
 
   @override
@@ -77,20 +86,50 @@ class _ListMaterielScreenState extends State<ListMaterielScreen> {
                           DataRow(
                             cells: <DataCell>[
                               DataCell(Text(materielItem['nom_materiel'])),
-                              DataCell(Text('${materielItem['nombre_kw']} kW')),
+                              DataCell(Text('${convertNumber(materielItem['nombre_kw'])} KwH')),
                               DataCell(Text(
-                                  '${materielItem['duree_utilisation']} fois')),
+                                  '${convertNumber(materielItem['duree_utilisation'])} hrs')),
                               DataCell(
                                 Row(
                                   children: [
-                                    Text('bbbb'),
                                     IconButton(
-                                      icon: Icon(Icons.edit),
-                                      onPressed: () {},
+                                      icon: const Icon(Icons.edit),
+                                      onPressed: () {
+                                        Navigator.pushNamed(
+                                          context,
+                                          '/modifmateriel',
+                                          arguments: materielItem,
+                                        );
+                                      },
                                     ),
                                     IconButton(
-                                      icon: Icon(Icons.delete),
-                                      onPressed: () {},
+                                      icon: const Icon(Icons.delete),
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: Text('Confirmer la suppression'),
+                                              content: Text('Voulez-vous supprimer le materiel ${materielItem['nom_materiel']}?'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                    deleteMateriel(materielItem['id']);
+                                                  },
+                                                  child: Text('Confirmer'),
+                                                ),
+                                                TextButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Text('Annuler'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      },
                                     ),
                                   ],
                                 ),
