@@ -6,7 +6,7 @@ import 'package:partageo/model/facture.dart';
 import '../utils/route.dart';
 import '../utils/token.dart';
 
-  Future<List> getAllFacture() async {
+  Future getAllFacture() async {
   var client = http.Client();
   var url = Uri.https(Route.routePath, '/invoice/all');
   try{

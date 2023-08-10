@@ -81,58 +81,6 @@ class _EditAdressScreenState extends State<EditAdressScreen> {
               child: CustomTextField(label: 'Nom', controller: nameController),
             ),
             const SizedBox(height: 20.0),
-            Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      child: Text('duree de consommation (en heure)'),
-                    ),
-                    const SizedBox(height: 10.0),
-                    TextField(
-                      controller: dureeController,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                      ],
-                      decoration: const InputDecoration(
-                        contentPadding:
-                        EdgeInsets.symmetric(vertical: 5.0, horizontal: 12.0),
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ],
-                )
-            ),
-            const SizedBox(height: 20.0),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    width: double.infinity,
-                    child: Text('Nombre de KwH (Kw par heure)'),
-                  ),
-                  const SizedBox(height: 10.0),
-                  TextField(
-                    controller: kwhController,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                    ],
-                    decoration: const InputDecoration(
-                      contentPadding:
-                      EdgeInsets.symmetric(vertical: 5.0, horizontal: 12.0),
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20.0),
             Column(
               children: [
                 Row(

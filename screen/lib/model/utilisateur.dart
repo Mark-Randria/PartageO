@@ -19,8 +19,8 @@ class Utilisateur {
     nomUtilisateur = json['nom_utilisateur'];
     nomAdresse = json['user_adresse']['nom_adresse'];
     idAdresse = json['user_adresse']['id'];
-    montantPayer = json['montant_payer'];
-    montantRano = json['montant_rano'];
+    montantPayer = json['montant_payer'] ?? 0.0;
+    montantRano = json['montant_rano'] ?? 0.0;
     userMateriel = json['user_materiel'];
   }
 

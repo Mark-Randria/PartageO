@@ -33,6 +33,7 @@ class _FactureScreenState extends State<FactureScreen> {
   Future fetchData() async {
     final token = await getToken();
     final decodedToken = decodeToken(token);
+    print(decodedToken);
     final utilisateur = await getOneUserByName(decodedToken['nom'].toString());
 
     return utilisateur;
