@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:partageo/controller/materiel.dart';
+import 'package:partageo/controller/adresse.dart';
 
 import 'ui/customtextfield.dart';
 import 'utils/token.dart';
@@ -21,7 +20,7 @@ class _AddAdressScreenState extends State<AddAdressScreen> {
 
   @override
   Widget build(BuildContext context) {
-    void AddingMateriel() async {
+    void AddingAdress() async {
       final token = await getToken();
       final decodedToken = decodeToken(token);
       print(decodedToken);
@@ -50,12 +49,13 @@ class _AddAdressScreenState extends State<AddAdressScreen> {
           builder: (BuildContext context) {
             return AlertDialog(
               title: Text('Succes'),
-              content: Text('Le materiel a bien ete ajoute.'),
+              content: Text("L'addresse a bien ete ajoute."),
               actions: [
                 TextButton(
                   child: Text('OK'),
                   onPressed: () {
-                    Navigator.of(context).pushNamed('/facture');
+                    addAdresse(nomController.text);
+                      Navigator.of(context).pushNamed('/moderatorscreen');
                   },
                 ),
               ],
@@ -125,7 +125,7 @@ class _AddAdressScreenState extends State<AddAdressScreen> {
                   children: [
                     FilledButton(
                       onPressed: () {
-
+                        AddingAdress();
                       },
                       style: ButtonStyle(
                           backgroundColor:

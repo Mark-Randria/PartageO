@@ -39,10 +39,9 @@ class _ModeratorScreenState extends State<ModeratorScreen> {
     final token = await getToken();
     final decodedToken = decodeToken(token);
     print(decodedToken);
-    final facture = await getAllFacture();
     final utilisateur = decodedToken['nom'];
 
-    return [utilisateur, facture];
+    return utilisateur;
   }
 
   @override
@@ -61,8 +60,7 @@ class _ModeratorScreenState extends State<ModeratorScreen> {
             return Center(child: Text('still fetching data'));
           } else {
             final retrievedData = snapshot.data;
-            final name = retrievedData[0].toString();
-            final refFacture = retrievedData[1];
+            final name = retrievedData;
 
             return MaterialApp(
               debugShowCheckedModeBanner: false,
@@ -84,7 +82,6 @@ class _ModeratorScreenState extends State<ModeratorScreen> {
                     ),
                     ListView(
                       children: [
-                        Text(refFacture.toString()),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -115,7 +112,7 @@ class _ModeratorScreenState extends State<ModeratorScreen> {
                                 ),
                               ),
                               Text(
-                                name,
+                                retrievedData,
                                 style: TextStyle(
                                   color: Colors.grey.shade700,
                                   fontSize: 16,
@@ -135,81 +132,6 @@ class _ModeratorScreenState extends State<ModeratorScreen> {
                             ],
                           ),
                         ),
-                        Container(
-                          padding:
-                          EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            'Liste des factures',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontSize: 22,
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16.0),
-                          child: DropdownButtonFormField(
-                            hint: const Text('Facture'),
-                            items: [
-                              ...List.generate(
-                                5,
-                                    (index) => DropdownMenuItem(
-                                  value: 'Option ${index + 1}',
-                                  child: Text('Option ${index + 1}'),
-                                ),
-                              ),
-                            ],
-                            onChanged: (value) {
-                              setState(() {});
-                            },
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: DropdownButtonFormField(
-                            hint: const Text('Adresse'),
-                            items: [
-                              ...List.generate(
-                                5,
-                                    (index) => DropdownMenuItem(
-                                  value: 'Option no ${index + 1}',
-                                  child: Text('Option no ${index + 1}'),
-                                ),
-                              ),
-                            ],
-                            onChanged: (value) {
-                              setState(() {});
-                            },
-                          ),
-                        ),
-                        const SizedBox(height: 10.0),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 12.0),
-                          child: Container(
-                            height: 200,
-                            child: CustomListView(
-                              itemCount: 5,
-                            ),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.grey.shade300,
-                                width: 1,
-                              ),
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(15),
-                                topRight: Radius.circular(15),
-                                bottomLeft: Radius.circular(15),
-                                bottomRight: Radius.circular(15),
-                              ),
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ],
@@ -226,7 +148,9 @@ class _ModeratorScreenState extends State<ModeratorScreen> {
                             children: [
                               const SizedBox(height: 30.0),
                               IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, '/addfacture');
+                                  },
                                   icon: Icon(
                                     Icons.receipt_long_outlined,
                                     size: 35.0,
@@ -234,7 +158,9 @@ class _ModeratorScreenState extends State<ModeratorScreen> {
                               const Text('Factures'),
                               const SizedBox(height: 10.0),
                               IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, '/adresse');
+                                  },
                                   icon: Icon(
                                     Icons.location_on,
                                     size: 35.0,
@@ -242,7 +168,9 @@ class _ModeratorScreenState extends State<ModeratorScreen> {
                               const Text('Adresse'),
                               const SizedBox(height: 10.0),
                               IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, '/listuser');
+                                  },
                                   icon: Icon(
                                     Icons.account_circle_outlined,
                                     size: 35.0,
