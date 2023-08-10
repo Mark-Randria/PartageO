@@ -61,7 +61,7 @@ class LoginScreen extends StatelessWidget {
       final connect = await login(nameController.text, passwordController.text);
 
       if (connect) {
-        final token = getToken();
+        final token = await getToken();
         final decodedToken = decodeToken(token);
         if (decodedToken['role'] == true) {
           Navigator.pushNamed(context, '/facture');

@@ -39,7 +39,7 @@ Future<List> getOneAdresse(int id) async {
   }
 }
 
-Future<List> addAdresse(String nom_adresse) async {
+Future<bool> addAdresse(String nom_adresse) async {
   var client = http.Client();
   var url = Uri.https(Route.routePath, '/adress/new');
   try {
@@ -49,7 +49,7 @@ Future<List> addAdresse(String nom_adresse) async {
     }, body: jsonEncode({
       "nom_address": nom_adresse
     }));
-    return jsonDecode(utf8.decode(response.bodyBytes));
+    return true;
   } finally {
     client.close();
   }
